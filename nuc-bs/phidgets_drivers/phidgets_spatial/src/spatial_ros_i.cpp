@@ -129,32 +129,43 @@ SpatialRosI::SpatialRosI(const rclcpp::NodeOptions &options)
     double cc_gain0 = 0.0;
     double cc_gain1 = 0.0;
     double cc_gain2 = 0.0;
-    double cc_T0 = 0.0;
-    double cc_T1 = 0.0;
-    double cc_T2 = 0.0;
-    double cc_T3 = 0.0;
-    double cc_T4 = 0.0;
-    double cc_T5 = 0.0;
+    double cc_t0 = 0.0;
+    double cc_t1 = 0.0;
+    double cc_t2 = 0.0;
+    double cc_t3 = 0.0;
+    double cc_t4 = 0.0;
+    double cc_t5 = 0.0;
 
     try
     {
+        std::cout <<__LINE__<<std::endl;
         cc_mag_field = this->get_parameter("cc_mag_field").get_value<double>();
+        std::cout <<__LINE__<<std::endl;
         cc_offset0 = this->get_parameter("cc_offset0").get_value<double>();
+        std::cout <<__LINE__<<std::endl;
         cc_offset1 = this->get_parameter("cc_offset1").get_value<double>();
+             std::cout <<__LINE__<<std::endl;
         cc_offset2 = this->get_parameter("cc_offset2").get_value<double>();
+             std::cout <<__LINE__<<std::endl;
         cc_gain0 = this->get_parameter("cc_gain0").get_value<double>();
+             std::cout <<__LINE__<<std::endl;
         cc_gain1 = this->get_parameter("cc_gain1").get_value<double>();
+             std::cout <<__LINE__<<std::endl;
         cc_gain2 = this->get_parameter("cc_gain2").get_value<double>();
-        cc_T0 = this->get_parameter("cc_t0").get_value<double>();
-        cc_T1 = this->get_parameter("cc_t1").get_value<double>();
-        cc_T2 = this->get_parameter("cc_t2").get_value<double>();
-        cc_T3 = this->get_parameter("cc_t3").get_value<double>();
-        cc_T4 = this->get_parameter("cc_t4").get_value<double>();
-        cc_T5 = this->get_parameter("cc_t5").get_value<double>();
+             std::cout <<__LINE__<<std::endl;
+        cc_t0 = this->get_parameter("cc_t0").get_value<double>();
+             std::cout <<__LINE__<<' '<<cc_t0<<std::endl;
+        cc_t1 = this->get_parameter("cc_t1").get_value<double>();
+        cc_t2 = this->get_parameter("cc_t2").get_value<double>();
+        cc_t3 = this->get_parameter("cc_t3").get_value<double>();
+        cc_t4 = this->get_parameter("cc_t4").get_value<double>();
+        cc_t5 = this->get_parameter("cc_t5").get_value<double>();
+             std::cout <<__LINE__<<std::endl;
         has_compass_params = true;
     } catch (const rclcpp::exceptions::ParameterNotDeclaredException &)
     {
     }
+    //std::cout<< this->get_parameter("cc_mag_field")<<std::endl;
 
     RCLCPP_INFO(get_logger(),
                 "Connecting to Phidgets Spatial serial %d, hub port %d ...",
@@ -187,9 +198,10 @@ SpatialRosI::SpatialRosI(const rclcpp::NodeOptions &options)
 
         if (has_compass_params)
         {
+             std::cout<<"has_compass_params : "<<cc_t0 <<std::endl;
             spatial_->setCompassCorrectionParameters(
                 cc_mag_field, cc_offset0, cc_offset1, cc_offset2, cc_gain0,
-                cc_gain1, cc_gain2, cc_T0, cc_T1, cc_T2, cc_T3, cc_T4, cc_T5);
+                cc_gain1, cc_gain2, cc_t0, cc_t1, cc_t2, cc_t3, cc_t4, cc_t5);
         } else
         {
             RCLCPP_INFO(get_logger(), "No compass correction params found.");
