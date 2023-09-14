@@ -1,0 +1,15 @@
+phidgets_spatial:
+    ros__parameters:
+        cc_gain0 : 0.82156
+        cc_gain1 : 0.86235
+        cc_gain2 : 0.84195
+        cc_mag_field : 1.18772
+        cc_offset0 : -0.01963
+        cc_offset1 : 0.01095
+        cc_offset2 : 0.0
+        cc_t0 : -0.01557
+        cc_t1 : 0.0
+        cc_t2 : -0.01529
+        cc_t3 : 0.0
+        cc_t4 : 0.0
+        cc_t5 : 0.0

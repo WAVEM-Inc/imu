@@ -34,7 +34,7 @@
 
 #include "phidgets_api/phidget22.hpp"
 #include "phidgets_api/spatial.hpp"
-
+#include <iostream>
 namespace phidgets {
 
 Spatial::Spatial(int32_t serial_number, int hub_port, bool is_hub_port_device,
@@ -130,6 +130,7 @@ void Spatial::setCompassCorrectionParameters(
     PhidgetReturnCode ret = PhidgetSpatial_setMagnetometerCorrectionParameters(
         spatial_handle_, cc_mag_field, cc_offset0, cc_offset1, cc_offset2,
         cc_gain0, cc_gain1, cc_gain2, cc_T0, cc_T1, cc_T2, cc_T3, cc_T4, cc_T5);
+    std::cout<<"setCompassCorrectionParameters : "<<cc_T0 <<std::endl;
     if (ret != EPHIDGET_OK)
     {
         throw Phidget22Error("Failed to set magnetometer correction parameters",
