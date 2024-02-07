@@ -9,6 +9,7 @@ def generate_launch_description():
                 package='imu_complementary_filter',
                 node_executable='complementary_filter_node',
                 name='complementary_filter_gain_node',
+                arguments=['--ros-args','--enclave','/complementary_filter_node'],
                 output='screen',
                 parameters=[
                     {'do_bias_estimation': True},

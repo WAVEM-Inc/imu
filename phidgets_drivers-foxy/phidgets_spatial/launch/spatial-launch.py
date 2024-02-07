@@ -26,11 +26,13 @@ def generate_launch_description():
             namespace='',
             package='rclcpp_components',
             executable='component_container',
+            arguments=['--ros-args','--enclave','/component_container'],
             composable_node_descriptions=[
                 ComposableNode(
                     package='phidgets_spatial',
                     plugin='phidgets::SpatialRosI',
-                    name='phidgets_spatial'),
+                    name='phidgets_spatial',
+                    ),
             ],
             output='both',
     )
