@@ -1,1 +1,0 @@
-/home/ubuntu/ros2_ws/src/imu/build/bluespace_ai_xsens_mti_driver/ament_cmake_core/bluespace_ai_xsens_mti_driverConfig.cmake

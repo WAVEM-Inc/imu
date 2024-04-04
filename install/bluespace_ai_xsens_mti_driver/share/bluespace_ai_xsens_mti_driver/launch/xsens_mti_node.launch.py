@@ -1,1 +1,0 @@
-/home/ubuntu/ros2_ws/src/imu/bluespace_ai_xsens_ros_mti_driver/launch/xsens_mti_node.launch.py
