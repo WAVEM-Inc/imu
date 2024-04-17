@@ -16,6 +16,9 @@ def generate_launch_description():
     xsens_mti_node = Node(
             package='bluespace_ai_xsens_mti_driver',
             executable='xsens_mti_node',
+            remappings=[
+                ('/imu/data', '/sensor/imu/data')
+                ],
             name='xsens_mti_node',
             output='screen',
             parameters=[parameters_file_path],
