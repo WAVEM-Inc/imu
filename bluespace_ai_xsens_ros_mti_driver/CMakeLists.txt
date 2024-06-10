@@ -14,6 +14,7 @@ find_package(rclcpp REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(route_msgs REQUIRED)	#aaaa
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
@@ -44,6 +45,7 @@ ament_target_dependencies(xsens_mti_node
   rclcpp
   tf2
   tf2_ros
+  route_msgs	#aaaa
   std_msgs
   geometry_msgs
   sensor_msgs

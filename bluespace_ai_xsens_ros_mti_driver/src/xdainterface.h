@@ -66,9 +66,11 @@
 
 #include "xdacallback.h"
 #include <xstypes/xsportinfo.h>
+#include "route_msgs/msg/drive_state.hpp"	//aaaa
 
 #include "chrono"
 
+using DriveMSG = route_msgs::msg::DriveState;	//aaaa
 struct XsControl;
 struct XsDevice;
 
@@ -77,29 +79,33 @@ class PacketCallback;
 
 class XdaInterface : public rclcpp::Node
 {
-public:
-	explicit XdaInterface(const std::string &node_name, const rclcpp::NodeOptions &options=rclcpp::NodeOptions());
-	~XdaInterface();
+	public:
+		explicit XdaInterface(const std::string &node_name, const rclcpp::NodeOptions &options=rclcpp::NodeOptions());
+		~XdaInterface();
 
-	void spinFor(std::chrono::milliseconds timeout);
-	void registerPublishers();
+		void spinFor(std::chrono::milliseconds timeout);
+		void registerPublishers();
 
-	bool connectDevice();
-	bool prepare();
-	void close();
+		bool connectDevice();
+		bool prepare();
+		void close();
 
-	const int XS_DEFAULT_BAUDRATE = 115200;
+		const int XS_DEFAULT_BAUDRATE = 115200;
 
-private:
-	void registerCallback(PacketCallback *cb);
-	bool handleError(std::string error);
-	void declareCommonParameters();
+	private:
+		void registerCallback(PacketCallback *cb);
+		bool handleError(std::string error);
+		void declareCommonParameters();
 
-	XsControl *m_control;
-	XsDevice *m_device;
-	XsPortInfo m_port;
-	XdaCallback m_xdaCallback;
-	std::list<PacketCallback *> m_callbacks;
+		XsControl *m_control;
+		XsDevice *m_device;
+		XsPortInfo m_port;
+		XdaCallback m_xdaCallback;
+		std::list<PacketCallback *> m_callbacks;
+		/**aaaa*/
+		rclcpp::Subscription<DriveMSG>::SharedPtr sub_drive_;
+		void drive_callback(const std::shared_ptr<DriveMSG> drive); 
+		bool flag_start = true;	/*aaaa**/
 };
 
 #endif
