@@ -88,10 +88,32 @@ XdaInterface::XdaInterface(const std::string &node_name, const rclcpp::NodeOptio
 	, m_device(nullptr)
 	, m_xdaCallback(*this)
 {
+	sub_drive_ = this->create_subscription<DriveMSG>("/drive/info", 1, std::bind(&XdaInterface::drive_callback ,this ,std::placeholders::_1));
 	declareCommonParameters();
 	RCLCPP_INFO(get_logger(), "Creating XsControl object...");
 	m_control = XsControl::construct();
 	assert(m_control != 0);
+}
+void XdaInterface::drive_callback(const std::shared_ptr<DriveMSG> drive)
+{
+	assert(m_device != 0);
+	
+	if((drive->code.compare(std::string("straight"))==0) && flag_start)
+	{
+		m_device->gotoConfig();
+		RCLCPP_INFO(get_logger(), "IMU START RESET..");
+		m_device->gotoMeasurement();
+		flag_start=false;
+	}
+	else if((drive->code.compare(std::string("arrive"))==0) && (fabs(drive->end_node.heading - (int)drive->end_node.heading) > 0.00001))
+	{
+		if((fabs(drive->start_node.heading - drive->end_node.heading) > 0.00001) && (fabs(drive->end_node.heading - (int)drive->end_node.heading)-0.1 )>0.00001)
+		{
+			m_device->gotoConfig();
+			RCLCPP_INFO(get_logger(), "IMU NODE RESET..");
+			m_device->gotoMeasurement();
+		}
+	}
 }
 
 XdaInterface::~XdaInterface()
@@ -300,7 +322,6 @@ bool XdaInterface::prepare()
 				return handleError("Could not start recording");
 		}
 	}
-
 	return true;
 }
 

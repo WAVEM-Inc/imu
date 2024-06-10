@@ -80,13 +80,13 @@ int main(int argc, char *argv[])
 	auto xdaInterface = std::make_shared<XdaInterface>("xsens_driver", nodeOptions);
 	exec.add_node(xdaInterface);
 	xdaInterface->registerPublishers();
-
+/*
 	if (!xdaInterface->connectDevice())
 		return -1;
 
 	if (!xdaInterface->prepare())
 		return -1;
-
+*/
 	while (rclcpp::ok())
 	{
 		xdaInterface->spinFor(milliseconds(100));
