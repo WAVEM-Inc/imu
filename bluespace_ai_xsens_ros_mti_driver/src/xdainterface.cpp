@@ -98,7 +98,7 @@ XdaInterface::XdaInterface(const std::string &node_name, const rclcpp::NodeOptio
 void XdaInterface::drive_callback(const std::shared_ptr<DriveMSG> drive)
 {
 	assert(m_device != 0);
-	
+/*	
 	if((drive->code.compare(std::string("straight"))==0) && flag_start)
 	{
 		m_device->gotoConfig();
@@ -106,7 +106,9 @@ void XdaInterface::drive_callback(const std::shared_ptr<DriveMSG> drive)
 		m_device->gotoMeasurement();
 		flag_start=false;
 	}
-	else if((drive->code.compare(std::string("arrive"))==0) && (fabs(drive->end_node.heading - (int)drive->end_node.heading) > 0.00001))
+	
+
+	else */if((drive->code.compare(std::string("arrive"))==0) && (fabs(drive->end_node.heading - (int)drive->end_node.heading) > 0.00001))
 	{
 		if((fabs(drive->start_node.heading - drive->end_node.heading) > 0.00001) )
 		{
