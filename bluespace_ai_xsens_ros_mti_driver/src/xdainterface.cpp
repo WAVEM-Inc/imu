@@ -88,12 +88,13 @@ XdaInterface::XdaInterface(const std::string &node_name, const rclcpp::NodeOptio
 	, m_device(nullptr)
 	, m_xdaCallback(*this)
 {
-	sub_drive_ = this->create_subscription<DriveMSG>("/drive/info", 1, std::bind(&XdaInterface::drive_callback ,this ,std::placeholders::_1));
+	sub_drive_ = this->create_subscription<DriveMSG>("/drive/info", 1, std::bind(&XdaInterface::drive_callback ,this ,std::placeholders::_1));	//aaaa
 	declareCommonParameters();
 	RCLCPP_INFO(get_logger(), "Creating XsControl object...");
 	m_control = XsControl::construct();
 	assert(m_control != 0);
 }
+/**aaaa*/
 void XdaInterface::drive_callback(const std::shared_ptr<DriveMSG> drive)
 {
 	assert(m_device != 0);
@@ -115,6 +116,7 @@ void XdaInterface::drive_callback(const std::shared_ptr<DriveMSG> drive)
 		}
 	}
 }
+/*aaaa**/
 
 XdaInterface::~XdaInterface()
 {

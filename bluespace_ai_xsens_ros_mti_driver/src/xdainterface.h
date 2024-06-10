@@ -66,11 +66,11 @@
 
 #include "xdacallback.h"
 #include <xstypes/xsportinfo.h>
-#include "route_msgs/msg/drive_state.hpp"
+#include "route_msgs/msg/drive_state.hpp"	//aaaa
 
 #include "chrono"
 
-using DriveMSG = route_msgs::msg::DriveState;
+using DriveMSG = route_msgs::msg::DriveState;	//aaaa
 struct XsControl;
 struct XsDevice;
 
@@ -102,9 +102,10 @@ class XdaInterface : public rclcpp::Node
 		XsPortInfo m_port;
 		XdaCallback m_xdaCallback;
 		std::list<PacketCallback *> m_callbacks;
+		/**aaaa*/
 		rclcpp::Subscription<DriveMSG>::SharedPtr sub_drive_;
-		void drive_callback(const std::shared_ptr<DriveMSG> drive);
-		bool flag_start = true; 
+		void drive_callback(const std::shared_ptr<DriveMSG> drive); 
+		bool flag_start = true;	/*aaaa**/
 };
 
 #endif
