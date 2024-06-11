@@ -110,8 +110,9 @@ void XdaInterface::drive_callback(const std::shared_ptr<DriveMSG> drive)
 
 	else */if((drive->code.compare(std::string("arrive"))==0) && (fabs(drive->end_node.heading - (int)drive->end_node.heading) > 0.00001))
 	{
-		if((fabs(drive->start_node.heading - drive->end_node.heading) > 0.00001) )
+		if(drive->end_node.kind.compare(std::string("waiting"))==0)
 		{
+			sleep(1);
 			m_device->gotoConfig();
 			RCLCPP_INFO(get_logger(), "IMU NODE RESET..");
 			m_device->gotoMeasurement();
