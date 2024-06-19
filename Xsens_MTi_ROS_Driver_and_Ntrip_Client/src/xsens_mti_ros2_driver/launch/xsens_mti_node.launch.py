@@ -19,7 +19,8 @@ def generate_launch_description():
             name='xsens_mti_node',
             output='screen',
             parameters=[parameters_file_path],
-            remappings=[('/nmea', '/nmea_mti')],
+            remappings=[('/nmea', '/nmea_mti')
+                ,('imu/data','sensor/imu/data')],
             arguments=[]
             )
     ld.add_action(xsens_mti_node)
